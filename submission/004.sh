@@ -5,7 +5,7 @@
 #   `xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2`
 
 pk=xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2
-echo "$pk"
+# echo "$pk"
 checksum=$(bitcoin-cli getdescriptorinfo "tr($pk/0/*)" | jq -r '.checksum')
-echo $checksum
-bitcoin-cli deriveaddresses "tr($pk/0/*)#$checksum" "[100,101]"
+# echo $checksum
+bitcoin-cli deriveaddresses "tr($pk/0/*)#$checksum" "[100,101]" | jq -r '.[0]'

@@ -2,4 +2,6 @@
 #   `37d966a263350fe747f1c606b159987545844a493dd38d84b070027a895c4517`
 
 rt=$(bitcoin-cli getrawtransaction 37d966a263350fe747f1c606b159987545844a493dd38d84b070027a895c4517)
-bitcoin-cli decoderawtransaction $rt
+keys=$(bitcoin-cli decoderawtransaction $rt | jq -r '.vin[] | .txinwitness[1]?' | jq -R -s -c 'split("\n")[:-1]')
+echo $keys
+bitcoin-cli createmultisig 1 "$keys"
